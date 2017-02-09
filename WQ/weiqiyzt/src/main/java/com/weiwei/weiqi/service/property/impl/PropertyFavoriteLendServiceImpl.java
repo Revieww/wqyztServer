@@ -1,5 +1,7 @@
 package com.weiwei.weiqi.service.property.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,14 +23,23 @@ public class PropertyFavoriteLendServiceImpl  extends BaseServiceImpl implements
 	private PropertyLendDao lendDao;
 	
 	@Override
-	public GeneralResult save(FavoriteLendEnter favoriteLendEnter) {
+	public GeneralResult collect(FavoriteLendEnter favoriteLendEnter) {
 		
-		PropertyFavoriteLend propertyFavoriteLend = new PropertyFavoriteLend();
-		propertyFavoriteLend.setCustomerId(favoriteLendEnter.getUserId());
-		propertyFavoriteLend.setPropertyLend(lendDao.getOne(favoriteLendEnter.getId()));
-		favoriteLendDao.save(propertyFavoriteLend);
-		
+		PropertyFavoriteLend myfavoritelend = getMyFavoriteLend(favoriteLendEnter.getId(),favoriteLendEnter.getUserId());
+		//初次添加收藏
+		if(myfavoritelend==null){
+			myfavoritelend = new PropertyFavoriteLend();
+			myfavoritelend.setCustomerId(favoriteLendEnter.getUserId());
+			myfavoritelend.setPropertyLend(lendDao.getOne(favoriteLendEnter.getId()));
+			favoriteLendDao.save(myfavoritelend);
+		}else{
+			favoriteLendDao.updateCacelled(!myfavoritelend.getIsCancelled());
+		}
 		return new GeneralResult(ResultCodeEnum.RESULT_SUCCESS);
 	}
 
+	private PropertyFavoriteLend getMyFavoriteLend(int lendId,int userId){
+		List<PropertyFavoriteLend> myfavoritelends = favoriteLendDao.getByUserAndLend(lendId,userId);
+		return myfavoritelends.size() > 0 ? myfavoritelends.get(0) : null;
+	}
 }

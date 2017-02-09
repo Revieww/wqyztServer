@@ -14,15 +14,25 @@ import com.weiwei.weiqi.response.base.GeneralResult;
 import com.weiwei.weiqi.service.property.api.PropertyFavoriteLendService;
 
 @RestController
-@RequestMapping("/announcement")
+@RequestMapping("/favorite/lend")
 public class PropertyFavoriteLendController {
 	
 	@Autowired
 	private PropertyFavoriteLendService favoriteLendService;
 	
-	@GetMapping("/save")
-	public GeneralResult save(FavoriteLendEnter favoriteLendEnter){
-		return favoriteLendService.save(favoriteLendEnter);
+	/**
+	 * 
+	 * @Title: collect   
+	 * @Description: 添加或者取消收藏出租
+	 * @param @param favoriteLendEnter
+	 * @param @return    设定文件   
+	 * @return GeneralResult    返回类型   
+	 * @throws 
+	 * @version V1.0
+	 */
+	@GetMapping("/collect")
+	public GeneralResult collect(FavoriteLendEnter favoriteLendEnter){
+		return favoriteLendService.collect(favoriteLendEnter);
 	}
 	 
 	

@@ -5,6 +5,8 @@ import com.weiwei.weiqi.response.base.GeneralResult;
 
 public interface PropertyFavoriteLendService {
 
-	GeneralResult save(FavoriteLendEnter favoriteLendEnter);
+	//GeneralResult save(FavoriteLendEnter favoriteLendEnter);
+
+	GeneralResult collect(FavoriteLendEnter favoriteLendEnter);
 
 }

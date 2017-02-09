@@ -7,4 +7,6 @@ public interface PropertyFavoriteSellService {
 
 	GeneralResult save(FavoriteLendEnter favoriteLendEnter);
 
+	GeneralResult collect(FavoriteLendEnter favoriteLendEnter);
+
 }

@@ -22,15 +22,15 @@ public class AchievementTransformController {
 	/**
 	  * 
 	  * @Title: list   
-	  * @Description: TODO 
-	  * @param @param request
-	  * @param @param listEnter
+	  * @Description: 专利列表
+	  * @param @param page	分页信息
+	  * @param @param listEnter	参数信息
 	  * @param @return   
 	  * @return GeneralResult    
 	  * @throws
 	  */
 	@RequestMapping(value = "/list")
-	public GeneralResult list(MyPageRequest request,ListEnter listEnter){
-		return transformService.list(request,listEnter);
+	public GeneralResult list(MyPageRequest page,ListEnter listEnter){
+		return transformService.list(page,listEnter);
 	}
 }	

@@ -76,6 +76,7 @@ public class HtmlsServiceImpl extends BaseServiceImpl implements HtmlsService {
 		if(enter.getTitle()!=null){
 			params.put("CONTAIN_title", new String[]{enter.getTitle()});
 		}
+		params.put("EQ_typeid", new String[]{enter.getTypeid().toString()});
 		Pageable pageable = getPageable(pageRequest, new Sort(Direction.DESC, "url"));
 		Specification<Htmls> spec = spec(params, Htmls.class);
 		Page<Htmls> page = htmlsDao.findAll(spec, pageable);
